@@ -34,7 +34,58 @@ function saveApplication(payload) {
   localStorage.setItem(key, JSON.stringify(list));
 }
 
-function onSubmit(e) {
+// Parâmetros configuráveis para envio de e-mail
+// O endpoint do Formspree deve ser configurado para que o envio de e-mail funcione.
+// 1. Crie uma conta em https://formspree.io/
+// 2. Crie um novo formulário e substitua a URL abaixo.
+const EMAIL_ENDPOINT = 'https://formspree.io/f/mldoyywj'; // <-- SUBSTITUA COM SEU ENDPOINT
+// E-mail do destinatário (quem receberá a candidatura).
+const EMAIL_TO = 'saboresdacasa.rest@gmail.com';
+
+// Validação do endpoint: precisa ser um endpoint de formulário do Formspree
+function isValidEmailEndpoint(url) {
+  if (!url) return false;
+  try {
+    const u = new URL(url);
+    return u.hostname === 'formspree.io' && u.pathname.startsWith('/f/');
+  } catch {
+    return false;
+  }
+}
+
+async function sendEmail(payload) {
+  // Não envia se o endpoint não for configurado corretamente
+  if (!EMAIL_TO || !isValidEmailEndpoint(EMAIL_ENDPOINT)) {
+    return { ok: false, skipped: true };
+  }
+
+  const subject = `Nova candidatura – ${payload.nome} (${payload.cargo})`;
+
+  // O Formspree usa o campo `_replyto` para o "Responder a" no e-mail
+  const data = {
+    ...payload,
+    _subject: subject,
+    _replyto: payload.email,
+  };
+
+  try {
+    const res = await fetch(EMAIL_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    if (!res.ok) throw new Error(`Status ${res.status}`);
+    return { ok: true };
+  } catch (err) {
+    console.error('Falha no envio de e-mail:', err);
+    return { ok: false };
+  }
+}
+
+async function onSubmit(e) {
   e.preventDefault();
   const form = e.currentTarget;
   const status = document.getElementById('form-status');
@@ -58,7 +109,15 @@ function onSubmit(e) {
   };
   try {
     saveApplication(payload);
-    status.textContent = 'Candidatura enviada com sucesso!';
+    status.textContent = 'Candidatura salva localmente. Enviando e-mail…';
+    const emailResult = await sendEmail(payload);
+    if (emailResult.ok) {
+      status.textContent = 'Candidatura enviada com sucesso! (e-mail enviado)';
+    } else if (emailResult.skipped) {
+      status.textContent = 'Candidatura salva. Configure EMAIL_ENDPOINT e EMAIL_TO para enviar e-mail.';
+    } else {
+      status.textContent = 'Candidatura salva, mas falhou o envio de e-mail.';
+    }
     form.reset();
   } catch (err) {
     console.error(err);
