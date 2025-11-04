@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Gestão de Candidaturas • Sabores da Casa</title>
+    <link rel="stylesheet" href="assets/base.css" />
+    <link rel="stylesheet" href="assets/admin.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="brand">
+          <span class="logo">🍽️</span>
+          <div class="brand-text">
+            <strong>Sabores da Casa</strong>
+            <small>Carangola • MG</small>
+          </div>
+        </div>
+        <nav class="nav" aria-label="Navegação principal">
+          <a href="index.html">Início</a>
+          <a href="vagas.html">Vagas</a>
+          <a href="candidatar.html" class="cta">Candidatar-se</a>
+          <a href="admin.html" class="active" title="Gestão">Gestão</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="conteudo" class="container">
+      <h1>Gestão de Candidaturas</h1>
+      <p>Visualize, filtre e exporte as candidaturas recebidas.</p>
+
+      <!-- Login -->
+      <section id="login" class="card" aria-labelledby="titulo-login">
+        <h2 id="titulo-login">Acesso restrito</h2>
+        <p>Informe seu login e senha para acessar a gestão.</p>
+        <form id="login-form" class="form" method="post" action="#" novalidate>
+          <div class="grid two-col">
+            <div class="field">
+              <label for="loginUsuario">Login</label>
+              <input type="text" id="loginUsuario" name="loginUsuario" autocomplete="username" required />
+            </div>
+            <div class="field">
+              <label for="loginSenha">Senha</label>
+              <input type="password" id="loginSenha" name="loginSenha" autocomplete="current-password" required />
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Entrar</button>
+          </div>
+          <p id="login-status" class="status" role="alert" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <!-- Gestão (somente autenticado) -->
+      <section id="gestao" class="card hidden" aria-labelledby="titulo-listagem">
+        <h2 id="titulo-listagem" class="visualmente-oculto">Listagem e ações</h2>
+        <div class="grid two-col">
+          <div class="field">
+            <label for="filtroCargo">Filtrar por cargo</label>
+            <select id="filtroCargo">
+              <option value="">Todos</option>
+              <option value="auxiliar_cozinha">Auxiliar de Cozinha</option>
+              <option value="atendente">Atendente</option>
+              <option value="auxiliar_limpeza">Auxiliar de Limpeza</option>
+            </select>
+          </div>
+          <div class="field actions-right">
+            <button id="btnExport" class="btn btn-outline">Exportar CSV</button>
+            <button id="btnClear" class="btn btn-danger">Limpar dados (local)</button>
+            <button id="btnLogout" class="btn btn-outline" title="Encerrar sessão">Sair</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="table" id="tabelaCandidatos">
+            <caption>Lista de candidaturas recebidas</caption>
+            <thead>
+              <tr>
+                <th scope="col">Data</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Email</th>
+                <th scope="col">Telefone</th>
+                <th scope="col">CPF</th>
+                <th scope="col">Cargo</th>
+                <th scope="col">Disponibilidade</th>
+                <th scope="col">Experiência</th>
+                <th scope="col">Pretensão</th>
+                <th scope="col">Link CV</th>
+                <th scope="col">Cidade/Bairro</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p id="admin-status" class="status" aria-live="polite"></p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <address>
+          <strong>Sabores da Casa</strong>
+          <small>Triângulo 3 • Carangola/MG</small>
+        </address>
+        <div class="footer-links">
+          <a href="vagas.html">Vagas</a>
+          <a href="candidatar.html">Candidatar-se</a>
+          <a href="#" onclick="alert('Política de Privacidade: dados usados apenas para análise de vagas.'); return false;">Privacidade</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="scripts/admVerificaUsuario.js"></script>
+    <script src="scripts/admin.js"></script>
+  </body>
+  </html>

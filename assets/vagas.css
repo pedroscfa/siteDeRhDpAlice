@@ -1,0 +1,6 @@
+/* Estilos específicos da página de vagas (vagas.html) */
+
+.cards.jobs .job ul { margin: 0 0 8px; }
+.job-meta { color: var(--muted); font-size: 13px; margin: 8px 0 12px; }
+.cards.jobs .job { transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+.cards.jobs .job:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,.08); border-color: var(--brand-2); }

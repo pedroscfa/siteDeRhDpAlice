@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Candidatar-se • Sabores da Casa</title>
+    <link rel="stylesheet" href="assets/base.css" />
+    <link rel="stylesheet" href="assets/candidatar.css" />
+  </head>
+  <body>
+    <a href="#conteudo" class="skip-link">Ir para o conteúdo principal</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="brand">
+          <span class="logo">🍽️</span>
+          <div class="brand-text">
+            <strong>Sabores da Casa</strong>
+            <small>Carangola • MG</small>
+          </div>
+        </div>
+        <nav class="nav" aria-label="Navegação principal">
+          <a href="index.html">Início</a>
+          <a href="vagas.html">Vagas</a>
+          <a href="candidatar.html" class="active cta">Candidatar-se</a>
+          <a href="admin.html" title="Gestão">Gestão</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="conteudo" class="container">
+      <h1>Enviar candidatura</h1>
+      <p>Preencha seus dados para participar do nosso processo seletivo.</p>
+
+      <form id="apply-form" class="form card" method="post" action="#" novalidate>
+        <fieldset>
+          <legend>Dados pessoais</legend>
+          <div class="grid two-col">
+            <div class="field">
+              <label for="nome">Nome completo *</label>
+              <input type="text" id="nome" name="nome" autocomplete="name" required />
+            </div>
+            <div class="field">
+              <label for="email">E-mail *</label>
+              <input type="email" id="email" name="email" autocomplete="email" required />
+            </div>
+          </div>
+
+          <div class="grid two-col">
+            <div class="field">
+              <label for="cpf">CPF *</label>
+              <input type="text" id="cpf" name="cpf" inputmode="numeric" pattern="\d{11}" maxlength="11" aria-describedby="cpf-help" required />
+              <small id="cpf-help">Somente números, 11 dígitos.</small>
+            </div>
+            <div class="field">
+              <label for="telefone">Telefone *</label>
+              <input type="tel" id="telefone" name="telefone" autocomplete="tel" required />
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Vaga e disponibilidade</legend>
+          <div class="grid two-col">
+            <div class="field">
+              <label for="cargo">Cargo desejado *</label>
+              <select id="cargo" name="cargo" required>
+                <option value="">Selecione…</option>
+                <option value="auxiliar_cozinha">Auxiliar de Cozinha</option>
+                <option value="atendente">Atendente</option>
+                <option value="auxiliar_limpeza">Auxiliar de Limpeza</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="inicio">Disponibilidade de início *</label>
+              <input type="date" id="inicio" name="inicio" required />
+            </div>
+          </div>
+
+          <div class="grid two-col">
+            <div class="field">
+              <label for="disponibilidade">Disponibilidade *</label>
+              <select id="disponibilidade" name="disponibilidade" required>
+                <option value="">Selecione…</option>
+                <option>Seg–Sáb (11h–15h)</option>
+                <option>Flexível em dias/turnos</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="pretensao">Pretensão Salarial (opcional)</label>
+              <input type="text" id="pretensao" name="pretensao" />
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Complementos</legend>
+          <div class="field">
+            <label for="experiencia">Experiência (breve descrição) *</label>
+            <textarea id="experiencia" name="experiencia" rows="4" required placeholder="Conte-nos sobre sua experiência na área"></textarea>
+          </div>
+          <div class="grid two-col">
+            <div class="field">
+              <label for="linkcv">Link para currículo (opcional)</label>
+              <input type="url" id="linkcv" name="linkcv" placeholder="Ex.: link do Google Drive ou LinkedIn" />
+            </div>
+            <div class="field">
+              <label for="cidade">Cidade/Bairro</label>
+              <input type="text" id="cidade" name="cidade" autocomplete="address-level2" placeholder="Carangola – Triângulo 3" />
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Consentimento</legend>
+          <div class="field checkbox">
+            <label>
+              <input type="checkbox" id="lgpd" required />
+              Concordo com a Política de Privacidade (dados usados apenas para análise de vagas).
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="form-actions">
+          <button class="btn btn-primary" type="submit">Enviar candidatura</button>
+          <a class="btn btn-outline" href="vagas.html">Ver vagas</a>
+        </div>
+        <p id="form-status" role="alert" class="status" aria-live="polite"></p>
+      </form>
+
+      <section class="card">
+        <h2>Como usamos seus dados</h2>
+        <p>
+          Seus dados serão armazenados localmente durante esta demonstração e podem ser
+          exportados em CSV na página de Gestão. Para operação real, recomendamos um backend seguro.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <address>
+          <strong>Sabores da Casa</strong>
+          <small>Triângulo 3 • Carangola/MG</small>
+        </address>
+        <div class="footer-links">
+          <a href="vagas.html">Vagas</a>
+          <a href="candidatar.html">Candidatar-se</a>
+          <a href="#" onclick="alert('Política de Privacidade: dados usados apenas para análise de vagas.'); return false;">Privacidade</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="scripts/form.js"></script>
+  </body>
+  </html>
