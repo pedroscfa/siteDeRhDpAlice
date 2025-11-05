@@ -15,6 +15,12 @@ body {
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   color: var(--text);
   background: var(--bg);
+  padding-top: 50vh;
+  transition: padding-top 0.3s ease;
+}
+
+body.scrolled {
+  padding-top: 25vh;
 }
 
 .skip-link {
@@ -33,17 +39,50 @@ body {
 .site-header {
   border-bottom: 1px solid var(--border);
   background: #fff;
-  position: sticky; top: 0; z-index: 10;
+  background-image: url('../imgs/restaurante.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: fixed; 
+  top: 0; 
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: 50vh;
+  transition: height 0.3s ease;
 }
-.header-inner { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; }
+
+.site-header.scrolled {
+  height: 25vh;
+}
+
+.site-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.header-inner { 
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  padding: 12px 0; 
+  position: relative;
+  z-index: 2;
+}
 .brand { display: flex; align-items: center; gap: 10px; }
 .logo { font-size: 28px; }
-.brand-text strong { display: block; font-size: 16px; }
-.brand-text small { color: var(--muted); }
+.brand-text strong { display: block; font-size: 16px; color: #fff; }
+.brand-text small { color: #ccc; }
 .nav { display: flex; gap: 14px; align-items: center; }
-.nav a { text-decoration: none; color: var(--text); padding: 8px 10px; border-radius: 8px; transition: background-color .2s ease, color .2s ease, box-shadow .15s ease; }
-.nav a:hover, .nav a:focus-visible { background: #fff8f1; color: var(--brand); box-shadow: 0 3px 10px rgba(0,0,0,.06); }
-.nav a.active { font-weight: 600; }
+.nav a { text-decoration: none; color: #fff; padding: 8px 10px; border-radius: 8px; transition: background-color .2s ease, color .2s ease, box-shadow .15s ease; }
+.nav a:hover, .nav a:focus-visible { background: rgba(255, 255, 255, 0.2); color: #fff; box-shadow: 0 3px 10px rgba(0,0,0,.06); }
+.nav a.active { font-weight: 600; color: #fff; }
 .nav a.cta { background: var(--brand); color: #fff; }
 .nav a.cta:hover, .nav a.cta:focus-visible { background: #a83226; }
 
